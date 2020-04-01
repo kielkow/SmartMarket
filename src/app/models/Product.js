@@ -10,6 +10,7 @@ class Product extends Model {
         file_id: Sequelize.INTEGER,
         price: Sequelize.STRING,
         amount: Sequelize.INTEGER,
+        active: Sequelize.BOOLEAN,
       },
       {
         sequelize,
