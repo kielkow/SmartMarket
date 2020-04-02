@@ -4,7 +4,7 @@ import multerConfig from './config/multer';
 
 import ProductController from './app/controllers/ProductController';
 import TypeController from './app/controllers/TypeController';
-import BrandController from './app/controllers/BrandController';
+// import BrandController from './app/controllers/BrandController';
 import FileController from './app/controllers/FileController';
 
 const routes = new Router();
@@ -18,12 +18,13 @@ routes.delete('/products/:id', ProductController.delete);
 routes.get('/types', TypeController.index);
 routes.post('/types', TypeController.store);
 routes.put('/types/:id', TypeController.update);
-routes.delete('/types/:id', TypeController.delete);
 
+/*
 routes.get('/brands', BrandController.index);
 routes.post('/brands', BrandController.store);
 routes.put('/brands/:id', BrandController.update);
 routes.delete('/brands/:id', BrandController.delete);
+*/
 
 routes.post('/files', upload.single('file'), FileController.store);
 
