@@ -75,5 +75,5 @@ function login(){
     body: JSON.stringify(user)
   });
 
-  location.replace("index.html")
+  location.replace("../Home/index.html")
 }
