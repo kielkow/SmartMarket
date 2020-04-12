@@ -41,9 +41,39 @@ function handleSubmit(){
     return;
   }
 
-  fetch('http://localhost:8080', {
+  fetch('http://localhost:8080/register', {
     headers: { "Content-Type": "application/json; charset=utf-8" },
     method: 'POST',
     body: JSON.stringify(newRegister)
   });
+}
+
+function login(){
+  document.getElementById("error").style.display = "none";
+
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  const user = {
+    email,
+    password
+  }
+
+  const arrayUser = Object.values(user);
+  let isNull = false;
+  arrayUser.forEach(propUser => {
+    if (propUser === null || propUser === '') isNull = true;
+  });
+  if (isNull){
+    document.getElementById("error").style.display = "block";
+    return;
+  }
+
+  fetch('http://localhost:8080/signin', {
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    method: 'POST',
+    body: JSON.stringify(user)
+  });
+
+  location.replace("index.html")
 }

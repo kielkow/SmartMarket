@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+*:focus{
+  outline: 0;
+}
+html, body, #root {
+  height: 100%;
+  background: #fff;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+}
+body, input, button {
+  font: 16px 'Roboto', sans-serif;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+button {
+  cursor: pointer;
+}
+
+#pattern {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+}
+
+#pattern form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+#pattern img {
+  max-width: 300px;
+}
+
+#pattern form input {
+  font-size: 14px;
+  border: 0.5px solid #c7c7c7;
+  border-radius: 4px;
+  height: 44px;
+  padding: 0 15px;
+  color: #bd6e34;
+  margin: 0 0 10px;
+}
+
+#pattern form div {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+#pattern form button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0 0;
+  height: 44px;
+  background: #e8833a;
+  font-weight: bold;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+#pattern form a:hover{
+  background: hsl(25, 67%, 49%);
+}
+
+#pattern form span {
+  font-size: 14px;
+  color: #e8833a;
+  margin: 0 0 10px;
+  font-weight: bold;
+}
+
+#error {
+  display: none;
+  font-size: 14px;
+  color: red;
+  margin: 0 0 10px;
+  font-weight: bold;
+}

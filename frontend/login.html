@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="login.css">
+  <title>SmartMarket</title>
+</head>
+<body>
+  <div id="pattern">
+    <img src="images/login.gif" alt="SmartMarket" />
+    <form action="">
+      <div>
+        <span>E-MAIL</span>
+        <input 
+          id="email" 
+          name="email" 
+          type="email" 
+          placeholder="Your e-mail..." 
+        />
+      </div>
+      <div>
+        <span>PASSWORD</span>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Your password..."
+        />
+      </div>
+      <span id="error">Please check the user info!</span>
+      <button type="button" onclick="login()">Enter</a>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

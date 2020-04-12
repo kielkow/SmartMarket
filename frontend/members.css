@@ -87,107 +87,30 @@ button {
   width: 32px;
 }
 
-#form-register {
+#pattern {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 1000px;
+  align-items: center;
+  max-width: 750px;
   margin: 50px auto;
-  border: 0.5px solid #dbdbdb;
-  border-radius: 4px;
-  padding: 30px;
-  background: #fff;
 }
 
-#group {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 25px;
-}
-
-#child{
-  display: flex;
-  flex-direction: column;
-  width: 28%;
-}
-
-#child span {
-  margin-bottom: 5px;
-  color: #e8833a;
-  font-weight: bold;
-}
-
-#child input {
-  border-radius: 3px;
-  border: 0.5px solid hsl(0, 4%, 80%);
-  padding: 5px;
-}
-
-#child select {
-  border-radius: 3px;
-  border: 0.5px solid hsl(0, 4%, 80%);
-  padding: 5px;
-}
-
-#child-message{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 120px;
-}
-
-#child-message span {
-  margin-bottom: 5px;
-  color: #e8833a;
-  font-weight: bold;
-}
-
-#child-message textarea {
-  font-size: 14px;
-  font-family: 'Roboto';
-  padding: 10px 10px;
-  border-radius: 3px;
-  border: 0.5px solid hsl(0, 4%, 80%);
-  flex: 1;
-  resize: none;
-} 
-
-#group-submit {
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-}
-
-#child-submit-accept {
+#content {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 }
 
-#child-submit-accept label{
-  margin-left: 10px;
-}
-
-#child-submit {
-  margin-top: 20px;
-}
-#child-submit button{
-  background: #e8833a;
-  color: #fff;
-  padding: 10px 15px;
-  border: 0;
-  font-weight: bold;
+#content img {
+  max-width: 200px;
   border-radius: 4px;
-  transition: background 0.2s;
 }
 
-#child-submit button:hover{
-  background: hsl(25, 67%, 49%);
-}
-
-#error {
-  display: none;
-  margin-top: 10px;
-  color: red;
+#content p {
+  margin-left: 10px;
+  color: #b15b1d;
+  font-size: 18px;
+  text-align: left;
 }
