@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="form.css">
+  <title>SmartMarket</title>
+</head>
+<body>  
+  <div id="header">
+    <nav>
+      <img src="images/marketplace.png" alt="">
+      <a href="index.html">Home</a>
+      <a href="form.html">Cadastro</a>
+      <a href="members.html">Representantes</a>
+    </nav>
+  
+    <aside>
+      <div id="profile">
+        <div>
+          <strong>User</strong>
+          <p>My Profile</p>
+        </div>
+        <img src="images/avatar.png" alt="Avatar" />
+      </div>
+    </aside>
+  </div>
+
+  <form id="form-register">
+    <div id="group">
+      <div id="child">
+        <span>Name</span>
+        <input id="name" type="text">
+      </div>
+      <div id="child">
+        <span>Email</span>
+        <input id="email" type="email">
+      </div>
+      <div id="child">
+        <span>Password</span>
+        <input id="password" type="password">
+      </div>
+    </div>
+
+    <div id="group">
+      <div id="child">
+        <span>Date of Birth</span>
+        <input id="date-birth" type="date">
+      </div>
+      <div id="child">
+        <span>Sex</span>
+        <select id="sex">
+          <option value="any">Any</option>
+          <option value="men">Men</option>
+          <option value="woman">Woman</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div id="child">
+        <span>Civil State</span>
+        <select id="civil-state">
+          <option value="any">Any</option>
+          <option value="married">Married</option>
+          <option value="not married">Not married</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="group">
+      <div id="child">
+        <span>Home phone</span>
+        <input id="home-phone" type="text">
+      </div>
+      <div id="child">
+        <span>Contact phone</span>
+        <input id="contact-phone" type="text">
+      </div>
+      <div id="child">
+        <span>Address</span>
+        <input id="address" type="text">
+      </div> 
+    </div>
+
+    <div id="child-message">
+      <span>Message</span>
+      <textarea id="message"></textarea>
+    </div>
+
+    <div id="group-submit">
+      <div id="child-submit-accept">
+        <input type="checkbox" id="accept" name="accept" value="accept">
+        <label for="accept"> I agree with this register</label><br>
+      </div>
+      <div id="child-submit">
+        <button type="button" onclick="handleSubmit()">Submit</button>
+      </div>
+    </div>
+
+    <span id="error">Please check the user info!</span>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
