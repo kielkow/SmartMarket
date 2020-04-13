@@ -191,3 +191,9 @@ button {
   margin-top: 10px;
   color: red;
 }
+
+#success {
+  display: none;
+  margin-top: 10px;
+  color: green;
+}

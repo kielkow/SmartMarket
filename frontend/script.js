@@ -32,6 +32,7 @@ function buildTable(){
 
 function handleSubmit(){
   document.getElementById("error").style.display = "none";
+  document.getElementById("success").style.display = "none";
 
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
@@ -72,6 +73,8 @@ function handleSubmit(){
     document.getElementById("error").style.display = "block";
     return;
   }
+
+  document.getElementById("success").style.display = "block";
 
   fetch('http://localhost:8080/register', {
     headers: { "Content-Type": "application/json; charset=utf-8" },
