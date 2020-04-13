@@ -1,3 +1,35 @@
+function buildTable(){
+  const users = [];
+
+  fetch('http://localhost8080/users')
+    .then(response => response.json())
+    .then(data => users = data);
+
+  const tableUsers = document.getElementById('table-users')
+
+  users.forEach(user => {
+    const row = tableUsers.insertRow(0);
+
+    const cellName = row.insertCell(0);
+    const cellEmail = row.insertCell(1);
+    const cellDateBirth = row.insertCell(2);
+    const cellSex = row.insertCell(3);
+    const cellCivilState = row.insertCell(4);
+    const cellHomePhone = row.insertCell(5);
+    const cellContactPhone = row.insertCell(6);
+    const cellAddress = row.insertCell(7);
+
+    cellName.innerHTML = user.name;
+    cellEmail.innerHTML = user.email;
+    cellDateBirth.innerHTML = user.dateBirth;
+    cellSex.innerHTML = user.sex;
+    cellCivilState.innerHTML = user.civilState;
+    cellHomePhone.innerHTML = user.homePhone;
+    cellContactPhone.innerHTML = user.contactPhone;
+    cellAddress.innerHTML = user.address;
+  });
+}
+
 function handleSubmit(){
   document.getElementById("error").style.display = "none";
 
