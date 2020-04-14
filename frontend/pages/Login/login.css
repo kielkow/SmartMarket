@@ -78,7 +78,7 @@ button {
   transition: background 0.2s;
 }
 
-#pattern form a:hover{
+#pattern form button:hover{
   background: hsl(25, 67%, 49%);
 }
 
