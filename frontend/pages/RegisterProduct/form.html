@@ -38,57 +38,13 @@
         <input id="name" type="text">
       </div>
       <div id="child">
-        <span>Email</span>
-        <input id="email" type="email">
+        <span>Price</span>
+        <input id="price" type="text">
       </div>
       <div id="child">
-        <span>Password</span>
-        <input id="password" type="password">
+        <span>Amount</span>
+        <input id="amount" type="number">
       </div>
-    </div>
-
-    <div id="group">
-      <div id="child">
-        <span>Date of Birth</span>
-        <input id="date-birth" type="date">
-      </div>
-      <div id="child">
-        <span>Sex</span>
-        <select id="sex">
-          <option value="any">Any</option>
-          <option value="men">Men</option>
-          <option value="woman">Woman</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div id="child">
-        <span>Civil State</span>
-        <select id="civil-state">
-          <option value="any">Any</option>
-          <option value="married">Married</option>
-          <option value="not married">Not married</option>
-        </select>
-      </div>
-    </div>
-
-    <div id="group">
-      <div id="child">
-        <span>Home phone</span>
-        <input id="home-phone" type="text">
-      </div>
-      <div id="child">
-        <span>Contact phone</span>
-        <input id="contact-phone" type="text">
-      </div>
-      <div id="child">
-        <span>Address</span>
-        <input id="address" type="text">
-      </div> 
-    </div>
-
-    <div id="child-message">
-      <span>Message</span>
-      <textarea id="message"></textarea>
     </div>
 
     <div id="group-submit">
@@ -97,12 +53,12 @@
         <label for="accept"> I agree with this register</label><br>
       </div>
       <div id="child-submit">
-        <button type="button" onclick="handleSubmit()">Submit</button>
+        <button type="button" onclick="handleSubmitProduct()">Submit</button>
       </div>
     </div>
 
-    <span id="error">Please check the user info 😕</span>
-    <span id="success">User created with success 😁!</span>
+    <span id="error">Please check the product info 😕</span>
+    <span id="success">Product created with success 😁!</span>
   </form>
 
   <script src="../../script.js"></script>

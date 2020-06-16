@@ -34,28 +34,20 @@
   <form id="form-register">
     <div id="group">
       <div id="child">
-        <span>User ID</span>
-        <input id="user_id" type="number">
+        <span>Product ID</span>
+        <input id="product_id" type="number">
       </div>
       <div id="child">
         <span>Name</span>
         <input id="name" type="text">
       </div>
       <div id="child">
-        <span>Email</span>
-        <input id="email" type="email">
+        <span>Price</span>
+        <input id="price" type="text">
       </div>
       <div id="child">
-        <span>Old Password</span>
-        <input id="oldPassword" type="password">
-      </div>
-      <div id="child">
-        <span>Password</span>
-        <input id="password" type="password">
-      </div>
-      <div id="child">
-        <span>Confirm Password</span>
-        <input id="confirmPassword" type="password">
+        <span>Amount</span>
+        <input id="amount" type="number">
       </div>
     </div>
 
@@ -65,12 +57,12 @@
         <label for="accept"> I agree with this update</label><br>
       </div>
       <div id="child-submit">
-        <button type="button" onclick="handleUpdate()">Update</button>
+        <button type="button" onclick="handleUpdateProduct()">Update</button>
       </div>
     </div>
 
-    <span id="error">Error! Please check the user info 😕</span>
-    <span id="success">User updated with success 😁!</span>
+    <span id="error">Error! Please check the product info 😕</span>
+    <span id="success">Product updated with success 😁!</span>
   </form>
 
   <script src="../../script.js"></script>

@@ -1,3 +1,41 @@
+function login(){
+  document.getElementById("error").style.display = "none";
+  
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  
+  const user = {
+    email,
+    password
+  }
+  
+  const arrayUser = Object.values(user);
+  let isNull = false;
+  arrayUser.forEach(propUser => {
+    if (propUser === null || propUser === '') isNull = true;
+  });
+  if (isNull){
+    document.getElementById("error").style.display = "block";
+    return;
+  }
+  
+  fetch('http://localhost:3333/sessions', {
+  headers: { "Content-Type": "application/json; charset=utf-8" },
+  method: 'POST',
+  body: JSON.stringify(user)
+}).then(
+  function(data) {
+    if(data.status !== 200) {
+      document.getElementById("error").style.display = "block";
+      return;
+    }
+    
+    location.replace("../Home/index.html")
+  }
+  )
+  
+}
+
 function buildTable(){
   fetch("http://localhost:3333/users")
   .then((resp) => resp.json())
@@ -175,31 +213,89 @@ function handleDelete(id) {
   }
 }
 
-function login(){
+function buildTableProducts(){
+  fetch("http://localhost:3333/products")
+  .then((resp) => resp.json())
+  .then(products => {
+    const tableproducts = document.getElementById('table-products')
+    
+    products.forEach(product => {
+      if(product.active) {
+        const row = tableproducts.insertRow(0);
+      
+        const cellId = row.insertCell(0);
+        const cellName = row.insertCell(1);
+        const cellPrice = row.insertCell(2);
+        const cellAmount = row.insertCell(3);
+        const cellCreated = row.insertCell(4);
+        const cellUpdated = row.insertCell(5);
+        const cellDelete = row.insertCell(6);
+        
+        cellId.innerHTML = product.id;
+        cellName.innerHTML = product.name;
+        cellPrice.innerHTML = product.price;
+        cellAmount.innerHTML = product.amount;
+        cellCreated.innerHTML = new Date(product.createdAt).toLocaleString();
+        cellUpdated.innerHTML = new Date(product.updatedAt).toLocaleString();
+        cellDelete.innerHTML = `<button type="button" onclick="handleDeleteProduct(${product.id})">Delete</button>`;
+      }
+    });
+    
+    const row = tableproducts.insertRow(0);
+    
+    const cellId = row.insertCell(0);
+    const cellName = row.insertCell(1);
+    const cellEmail = row.insertCell(2);
+    const cellProvider = row.insertCell(3);
+    const cellCreated = row.insertCell(4);
+    const cellUpdated = row.insertCell(5);
+    
+    cellId.innerHTML = 'ID';
+    cellName.innerHTML = 'NAME';
+    cellEmail.innerHTML = 'PRICE';
+    cellProvider.innerHTML = 'AMOUNT';
+    cellCreated.innerHTML = 'CREATED';
+    cellUpdated.innerHTML = 'UPDATED';
+  })
+  .catch(function(error) {
+    console.log(error);
+  }); 
+}
+
+function handleSubmitProduct(){
   document.getElementById("error").style.display = "none";
+  document.getElementById("success").style.display = "none";
   
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+  const name = document.getElementById('name').value;
+  const price = document.getElementById('price').value;
+  const amount = document.getElementById('amount').value;
   
-  const user = {
-    email,
-    password
-  }
+  const newRegister = {
+    name,
+    price,
+    amount,
+  };
   
-  const arrayUser = Object.values(user);
+  const arrayRegister = Object.values(newRegister);
   let isNull = false;
-  arrayUser.forEach(propUser => {
-    if (propUser === null || propUser === '') isNull = true;
+  arrayRegister.forEach(propRegister => {
+    if (propRegister === null || propRegister === '' || propRegister === 'any') isNull = true;
   });
   if (isNull){
     document.getElementById("error").style.display = "block";
     return;
   }
   
-  fetch('http://localhost:3333/sessions', {
+  const checkbox = document.getElementById('accept');
+  if(!checkbox.checked) {
+    document.getElementById("error").style.display = "block";
+    return;
+  }
+  
+  fetch('http://localhost:3333/products', {
   headers: { "Content-Type": "application/json; charset=utf-8" },
   method: 'POST',
-  body: JSON.stringify(user)
+  body: JSON.stringify(newRegister)
 }).then(
   function(data) {
     if(data.status !== 200) {
@@ -207,8 +303,73 @@ function login(){
       return;
     }
     
-    location.replace("../Home/index.html")
+    document.getElementById("success").style.display = "block";
   }
-  )
+  );
+}
+
+function handleUpdateProduct(){
+  document.getElementById("error").style.display = "none";
+  document.getElementById("success").style.display = "none";
   
+  const product_id = document.getElementById('product_id').value;
+  const name = document.getElementById('name').value;
+  const price = document.getElementById('price').value;
+  const amount = document.getElementById('amount').value;
+  
+  const newRegister = {
+    product_id,
+    name,
+    price,
+    amount,
+  };
+  
+  const arrayRegister = Object.values(newRegister);
+  let isNull = false;
+  arrayRegister.forEach(propRegister => {
+    if (propRegister === null || propRegister === '' || propRegister === 'any') isNull = true;
+  });
+  if (isNull){
+    document.getElementById("error").style.display = "block";
+    return;
+  }
+  
+  const checkbox = document.getElementById('accept');
+  if(!checkbox.checked) {
+    document.getElementById("error").style.display = "block";
+    return;
+  }
+  
+  fetch('http://localhost:3333/products', {
+  headers: { "Content-Type": "application/json; charset=utf-8" },
+  method: 'PUT',
+  body: JSON.stringify(newRegister)
+}).then(
+  function(data) {
+    if(data.status !== 200) {
+      document.getElementById("error").style.display = "block";
+      return;
+    }
+    
+    document.getElementById("success").style.display = "block";
+  }
+  );
+}
+
+function handleDeleteProduct(id) {
+  const confirmDelete = confirm("Do you really want delete this product?");
+  
+  if (confirmDelete) {
+    fetch(`http://localhost:3333/products/${id}`, {
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    method: 'DELETE',
+  }).then(
+    function(data) {
+      if(data.status !== 200) {
+        return;
+      }
+      location.replace("../Products/products.html")
+    }
+    );
+  }
 }
