@@ -82,9 +82,9 @@ class ProductController {
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
-      type_id: Yup.number().required(),
-      brand_id: Yup.number().required(),
-      file_id: Yup.number().required(),
+      // type_id: Yup.number().required(),
+      // brand_id: Yup.number().required(),
+      // file_id: Yup.number().required(),
       price: Yup.string().required(),
       amount: Yup.number().required(),
     });
@@ -97,9 +97,9 @@ class ProductController {
     const productExists = await Product.findOne({
       where: {
         name: req.body.name,
-        type_id: req.body.type_id,
-        brand_id: req.body.brand_id,
-        file_id: req.body.file_id,
+        // type_id: req.body.type_id,
+        // brand_id: req.body.brand_id,
+        // file_id: req.body.file_id,
       },
     });
 
@@ -107,32 +107,32 @@ class ProductController {
       return res.status(400).json({ error: 'Product already exist' });
     }
 
-    // check if type exist
-    const typeExists = await Type.findOne({
-      where: { id: req.body.type_id },
-    });
+    // // check if type exist
+    // const typeExists = await Type.findOne({
+    //   where: { id: req.body.type_id },
+    // });
 
-    if (!typeExists) {
-      return res.status(400).json({ error: 'Type not exist' });
-    }
+    // if (!typeExists) {
+    //   return res.status(400).json({ error: 'Type not exist' });
+    // }
 
-    // check if brand exist
-    const brandExists = await Brand.findOne({
-      where: { id: req.body.brand_id },
-    });
+    // // check if brand exist
+    // const brandExists = await Brand.findOne({
+    //   where: { id: req.body.brand_id },
+    // });
 
-    if (!brandExists) {
-      return res.status(400).json({ error: 'Brand not exist' });
-    }
+    // if (!brandExists) {
+    //   return res.status(400).json({ error: 'Brand not exist' });
+    // }
 
-    // check if file exist
-    const fileExists = await File.findOne({
-      where: { id: req.body.file_id },
-    });
+    // // check if file exist
+    // const fileExists = await File.findOne({
+    //   where: { id: req.body.file_id },
+    // });
 
-    if (!fileExists) {
-      return res.status(400).json({ error: 'File not exist' });
-    }
+    // if (!fileExists) {
+    //   return res.status(400).json({ error: 'File not exist' });
+    // }
 
     const product = await Product.create(req.body);
 
@@ -141,10 +141,11 @@ class ProductController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
+      product_id: Yup.number(),
       name: Yup.string(),
-      type_id: Yup.number(),
-      brand_id: Yup.number(),
-      file_id: Yup.number(),
+      // type_id: Yup.number(),
+      // brand_id: Yup.number(),
+      // file_id: Yup.number(),
       price: Yup.string(),
       amount: Yup.number(),
     });
@@ -154,7 +155,7 @@ class ProductController {
     }
 
     try {
-      const product = await Product.findByPk(req.params.id, {
+      const product = await Product.findByPk(req.body.product_id, {
         include: [
           {
             model: Type,
@@ -187,9 +188,9 @@ class ProductController {
       const productExists = await Product.findOne({
         where: {
           name: req.body.name,
-          type_id: req.body.type_id,
-          brand_id: req.body.brand_id,
-          file_id: req.body.file_id,
+          // type_id: req.body.type_id,
+          // brand_id: req.body.brand_id,
+          // file_id: req.body.file_id,
         },
       });
 
@@ -197,32 +198,32 @@ class ProductController {
         return res.status(400).json({ error: 'Product already exist' });
       }
 
-      // check if type exist
-      const typeExists = await Type.findOne({
-        where: { id: req.body.type_id },
-      });
+      // // check if type exist
+      // const typeExists = await Type.findOne({
+      //   where: { id: req.body.type_id },
+      // });
 
-      if (!typeExists) {
-        return res.status(400).json({ error: 'Type not exist' });
-      }
+      // if (!typeExists) {
+      //   return res.status(400).json({ error: 'Type not exist' });
+      // }
 
-      // check if brand exist
-      const brandExists = await Brand.findOne({
-        where: { id: req.body.brand_id },
-      });
+      // // check if brand exist
+      // const brandExists = await Brand.findOne({
+      //   where: { id: req.body.brand_id },
+      // });
 
-      if (!brandExists) {
-        return res.status(400).json({ error: 'Brand not exist' });
-      }
+      // if (!brandExists) {
+      //   return res.status(400).json({ error: 'Brand not exist' });
+      // }
 
-      // check if file exist
-      const fileExists = await File.findOne({
-        where: { id: req.body.file_id },
-      });
+      // // check if file exist
+      // const fileExists = await File.findOne({
+      //   where: { id: req.body.file_id },
+      // });
 
-      if (!fileExists) {
-        return res.status(400).json({ error: 'File not exist' });
-      }
+      // if (!fileExists) {
+      //   return res.status(400).json({ error: 'File not exist' });
+      // }
 
       await product.update(req.body);
 

@@ -21,12 +21,12 @@ routes.get('/users', UserController.index);
 routes.put('/users', UserController.update);
 routes.delete('/users/:id', UserController.delete);
 
-routes.use(authMiddleware);
-
 routes.get('/products', ProductController.index);
 routes.post('/products', ProductController.store);
-routes.put('/products/:id', ProductController.update);
+routes.put('/products', ProductController.update);
 routes.delete('/products/:id', ProductController.delete);
+
+routes.use(authMiddleware);
 
 routes.get('/types', TypeController.index);
 routes.post('/types', TypeController.store);
