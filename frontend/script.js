@@ -76,7 +76,7 @@ function handleSubmit(){
 
   document.getElementById("success").style.display = "block";
 
-  fetch('http://localhost:8080/register', {
+  fetch('http://localhost:3333/user', {
     headers: { "Content-Type": "application/json; charset=utf-8" },
     method: 'POST',
     body: JSON.stringify(newRegister)
@@ -104,11 +104,19 @@ function login(){
     return;
   }
 
-  fetch('http://localhost:8080/signin', {
+  fetch('http://localhost:3333/sessions', {
     headers: { "Content-Type": "application/json; charset=utf-8" },
     method: 'POST',
     body: JSON.stringify(user)
-  });
+  }).then(
+    function(data) {
+      if(data.status !== 200) {
+        document.getElementById("error").style.display = "block";
+        return;
+      }
 
-  location.replace("../Home/index.html")
+      location.replace("../Home/index.html")
+    }
+  )
+
 }
