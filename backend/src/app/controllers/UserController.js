@@ -72,6 +72,7 @@ class UserController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
+      user_id: Yup.number(),
       name: Yup.string(),
       email: Yup.string().email(),
       oldPassword: Yup.string().min(6),
@@ -89,9 +90,9 @@ class UserController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { email, oldPassword } = req.body;
+    const { user_id, email, oldPassword } = req.body;
 
-    const user = await User.findByPk(req.userId);
+    const user = await User.findByPk(user_id);
 
     if (email !== user.email) {
       const userExists = await User.findOne({
@@ -109,7 +110,7 @@ class UserController {
 
     await user.update(req.body);
 
-    const { id, name, provider, avatar } = await User.findByPk(req.userId, {
+    const { id, name, provider, avatar } = await User.findByPk(user_id, {
       include: [
         {
           model: File,
