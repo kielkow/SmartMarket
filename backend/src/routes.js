@@ -14,8 +14,12 @@ import authMiddleware from './middlewares/auth';
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
+
+routes.post('/users', UserController.store);
+routes.get('/users', UserController.index);
+routes.put('/users/:id', UserController.update);
+routes.delete('/users/:id', UserController.delete);
 
 routes.use(authMiddleware);
 
@@ -31,9 +35,6 @@ routes.put('/types/:id', TypeController.update);
 routes.get('/brands', BrandController.index);
 routes.post('/brands', BrandController.store);
 routes.put('/brands/:id', BrandController.update);
-
-routes.get('/users', UserController.index);
-routes.put('/users/:id', UserController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
