@@ -3,7 +3,7 @@ function buildTable(){
   .then((resp) => resp.json())
   .then(users => {
     const tableUsers = document.getElementById('table-users')
-
+    
     users.forEach(user => {
       const row = tableUsers.insertRow(0);
       
@@ -13,6 +13,7 @@ function buildTable(){
       const cellProvider = row.insertCell(3);
       const cellCreated = row.insertCell(4);
       const cellUpdated = row.insertCell(5);
+      const cellDelete = row.insertCell(6);
       
       cellId.innerHTML = user.id;
       cellName.innerHTML = user.name;
@@ -20,10 +21,11 @@ function buildTable(){
       cellProvider.innerHTML = user.provider ? 'YES' : 'NO';
       cellCreated.innerHTML = new Date(user.createdAt).toLocaleString();
       cellUpdated.innerHTML = new Date(user.updatedAt).toLocaleString();
+      cellDelete.innerHTML = `<button type="button" onclick="handleDelete(${user.id})">Delete</button>`;
     });
-
+    
     const row = tableUsers.insertRow(0);
-      
+    
     const cellId = row.insertCell(0);
     const cellName = row.insertCell(1);
     const cellEmail = row.insertCell(2);
@@ -101,6 +103,76 @@ function handleSubmit(){
     document.getElementById("success").style.display = "block";
   }
   );
+}
+
+function handleUpdate(){
+  document.getElementById("error").style.display = "none";
+  document.getElementById("success").style.display = "none";
+  
+  const user_id = document.getElementById('user_id').value;
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const oldPassword = document.getElementById('oldPassword').value;
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  
+  const newRegister = {
+    user_id,
+    name,
+    email,
+    oldPassword,
+    password,
+    confirmPassword,
+  };
+  
+  const arrayRegister = Object.values(newRegister);
+  let isNull = false;
+  arrayRegister.forEach(propRegister => {
+    if (propRegister === null || propRegister === '' || propRegister === 'any') isNull = true;
+  });
+  if (isNull){
+    document.getElementById("error").style.display = "block";
+    return;
+  }
+  
+  const checkbox = document.getElementById('accept');
+  if(!checkbox.checked) {
+    document.getElementById("error").style.display = "block";
+    return;
+  }
+  
+  fetch('http://localhost:3333/users', {
+  headers: { "Content-Type": "application/json; charset=utf-8" },
+  method: 'PUT',
+  body: JSON.stringify(newRegister)
+}).then(
+  function(data) {
+    if(data.status !== 200) {
+      document.getElementById("error").style.display = "block";
+      return;
+    }
+    
+    document.getElementById("success").style.display = "block";
+  }
+  );
+}
+
+function handleDelete(id) {
+  const confirmDelete = confirm("Do you really want delete this user?");
+  
+  if (confirmDelete) {
+    fetch(`http://localhost:3333/users/${id}`, {
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    method: 'DELETE',
+  }).then(
+    function(data) {
+      if(data.status !== 200) {
+        return;
+      }
+      location.replace("../Users/users.html")
+    }
+    );
+  }
 }
 
 function login(){
