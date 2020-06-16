@@ -1,39 +1,52 @@
 function buildTable(){
-  const users = [];
+  fetch("http://localhost:3333/users")
+  .then((resp) => resp.json())
+  .then(users => {
+    const tableUsers = document.getElementById('table-users')
 
-  fetch('http://localhost8080/users')
-    .then(response => response.json())
-    .then(data => users = data);
+    users.forEach(user => {
+      const row = tableUsers.insertRow(0);
+      
+      const cellId = row.insertCell(0);
+      const cellName = row.insertCell(1);
+      const cellEmail = row.insertCell(2);
+      const cellProvider = row.insertCell(3);
+      const cellCreated = row.insertCell(4);
+      const cellUpdated = row.insertCell(5);
+      
+      cellId.innerHTML = user.id;
+      cellName.innerHTML = user.name;
+      cellEmail.innerHTML = user.email;
+      cellProvider.innerHTML = user.provider ? 'YES' : 'NO';
+      cellCreated.innerHTML = new Date(user.createdAt).toLocaleString();
+      cellUpdated.innerHTML = new Date(user.updatedAt).toLocaleString();
+    });
 
-  const tableUsers = document.getElementById('table-users')
-
-  users.forEach(user => {
     const row = tableUsers.insertRow(0);
-
-    const cellName = row.insertCell(0);
-    const cellEmail = row.insertCell(1);
-    const cellDateBirth = row.insertCell(2);
-    const cellSex = row.insertCell(3);
-    const cellCivilState = row.insertCell(4);
-    const cellHomePhone = row.insertCell(5);
-    const cellContactPhone = row.insertCell(6);
-    const cellAddress = row.insertCell(7);
-
-    cellName.innerHTML = user.name;
-    cellEmail.innerHTML = user.email;
-    cellDateBirth.innerHTML = user.dateBirth;
-    cellSex.innerHTML = user.sex;
-    cellCivilState.innerHTML = user.civilState;
-    cellHomePhone.innerHTML = user.homePhone;
-    cellContactPhone.innerHTML = user.contactPhone;
-    cellAddress.innerHTML = user.address;
-  });
+      
+    const cellId = row.insertCell(0);
+    const cellName = row.insertCell(1);
+    const cellEmail = row.insertCell(2);
+    const cellProvider = row.insertCell(3);
+    const cellCreated = row.insertCell(4);
+    const cellUpdated = row.insertCell(5);
+    
+    cellId.innerHTML = 'ID';
+    cellName.innerHTML = 'NAME';
+    cellEmail.innerHTML = 'E-MAIL';
+    cellProvider.innerHTML = 'PROVIDER';
+    cellCreated.innerHTML = 'CREATED';
+    cellUpdated.innerHTML = 'UPDATED';
+  })
+  .catch(function(error) {
+    console.log(error);
+  }); 
 }
 
 function handleSubmit(){
   document.getElementById("error").style.display = "none";
   document.getElementById("success").style.display = "none";
-
+  
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
@@ -44,7 +57,7 @@ function handleSubmit(){
   const contactPhone = document.getElementById('contact-phone').value;
   const address = document.getElementById('address').value;
   const message = document.getElementById('message').value;
-
+  
   const newRegister = {
     name,
     email,
@@ -57,7 +70,7 @@ function handleSubmit(){
     address,
     message,
   };
-
+  
   const arrayRegister = Object.values(newRegister);
   let isNull = false;
   arrayRegister.forEach(propRegister => {
@@ -67,33 +80,40 @@ function handleSubmit(){
     document.getElementById("error").style.display = "block";
     return;
   }
-
+  
   const checkbox = document.getElementById('accept');
   if(!checkbox.checked) {
     document.getElementById("error").style.display = "block";
     return;
   }
-
-  document.getElementById("success").style.display = "block";
-
-  fetch('http://localhost:3333/user', {
-    headers: { "Content-Type": "application/json; charset=utf-8" },
-    method: 'POST',
-    body: JSON.stringify(newRegister)
-  });
+  
+  fetch('http://localhost:3333/users', {
+  headers: { "Content-Type": "application/json; charset=utf-8" },
+  method: 'POST',
+  body: JSON.stringify({ name: newRegister.name, email: newRegister.email, password: newRegister.password })
+}).then(
+  function(data) {
+    if(data.status !== 200) {
+      document.getElementById("error").style.display = "block";
+      return;
+    }
+    
+    document.getElementById("success").style.display = "block";
+  }
+  );
 }
 
 function login(){
   document.getElementById("error").style.display = "none";
-
+  
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
-
+  
   const user = {
     email,
     password
   }
-
+  
   const arrayUser = Object.values(user);
   let isNull = false;
   arrayUser.forEach(propUser => {
@@ -103,20 +123,20 @@ function login(){
     document.getElementById("error").style.display = "block";
     return;
   }
-
+  
   fetch('http://localhost:3333/sessions', {
-    headers: { "Content-Type": "application/json; charset=utf-8" },
-    method: 'POST',
-    body: JSON.stringify(user)
-  }).then(
-    function(data) {
-      if(data.status !== 200) {
-        document.getElementById("error").style.display = "block";
-        return;
-      }
-
-      location.replace("../Home/index.html")
+  headers: { "Content-Type": "application/json; charset=utf-8" },
+  method: 'POST',
+  body: JSON.stringify(user)
+}).then(
+  function(data) {
+    if(data.status !== 200) {
+      document.getElementById("error").style.display = "block";
+      return;
     }
+    
+    location.replace("../Home/index.html")
+  }
   )
-
+  
 }
