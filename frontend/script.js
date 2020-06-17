@@ -233,7 +233,7 @@ function buildTableProducts(){
         
         cellId.innerHTML = product.id;
         cellName.innerHTML = product.name;
-        cellPrice.innerHTML = product.price;
+        cellPrice.innerHTML = `R$${product.price}`;
         cellAmount.innerHTML = product.amount;
         cellCreated.innerHTML = new Date(product.createdAt).toLocaleString();
         cellUpdated.innerHTML = new Date(product.updatedAt).toLocaleString();
