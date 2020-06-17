@@ -76,7 +76,7 @@ button {
   display: block;
   color: #e8833a;
 }
-#profile div p {
+#profile div a {
   display: block;
   margin-top: 2px;
   font-size: 12px;
